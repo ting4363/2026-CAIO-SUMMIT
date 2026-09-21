@@ -148,7 +148,15 @@ body {
   .takeaway { padding: 28px 24px; }
   .takeaway-text { font-size: 18px; }
 }
+html { scroll-behavior: smooth; }
+.back-to-top { position: fixed; right: 24px; bottom: 24px; width: 44px; height: 44px; border-radius: 50%; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 18px; box-shadow: var(--shadow-sm); opacity: 0; visibility: hidden; transform: translateY(8px); transition: opacity .25s ease, transform .25s ease, visibility .25s ease; z-index: 50; }
+.back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+.back-to-top:hover { filter: brightness(1.1); }
+@media (max-width: 640px) {
+  .back-to-top { right: 16px; bottom: 16px; width: 40px; height: 40px; font-size: 16px; }
+}
 </style>
+
 </head>
 <body>
 <div class="progress-bar" id="progressBar"></div>
@@ -160,7 +168,7 @@ body {
     <div class="hero-meta"><div class="meta-item"><strong>박준상</strong>Siemens, Intelligence Center X Presales 본부장</div><div class="meta-item"><strong>2026.09.18</strong>Keynote 2 (17분)</div><div class="meta-item"><strong>SESSION 06</strong>CAIO Summit 2026</div></div>
   </div>
 </header>
-<nav class="toc-wrap">
+<nav class="toc-wrap" id="toc">
   <div class="toc">
     <div class="toc-title">Contents</div>
     <ol><li><a href="#ov">백엔드에서 빠져 있는 것</a></li><li><a href="#shift">AI가 산업의 운영 방식을 바꾸고 있다</a></li><li><a href="#industrial">산업용 AI는 차원이 다르다</a></li><li><a href="#data">데이터는 다 있다고 하지만</a></li><li><a href="#lake">아름다운 데이터 폐기물 처리장</a></li><li><a href="#itmodel">애플리케이션을 에이전트가 대체한다면</a></li><li><a href="#whynot">왜 Agentic AI는 쉽게 확장되지 않는가</a></li><li><a href="#ready">AI-ready data가 없어서다</a></li><li><a href="#platform">Context · Intelligence · Action</a></li><li><a href="#graph">데이터를 모으지 않고 연결한다</a></li><li><a href="#studio">도메인 전문가가 곧 데이터 전문가다</a></li><li><a href="#onprem">반도체 · 국방 · 조선은 클라우드에 없다</a></li><li><a href="#cases">숫자로 확인된 결과</a></li><li><a href="#closing">Agent Intelligence is built on Data Intelligence</a></li></ol>
@@ -176,11 +184,17 @@ body {
     <div class="footer-meta">작성: 이유진 · 2026</div>
   </div>
 </footer>
+<a href="#toc" class="back-to-top" id="backToTop" aria-label="목차로 이동">↑</a>
 <script>
 window.addEventListener('scroll', function() {
   var h = document.documentElement;
   var scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
   document.getElementById('progressBar').style.width = scrolled + '%';
+});
+var backToTop = document.getElementById('backToTop');
+window.addEventListener('scroll', function() {
+  if (window.scrollY > 480) { backToTop.classList.add('visible'); }
+  else { backToTop.classList.remove('visible'); }
 });
 </script>
 </body>

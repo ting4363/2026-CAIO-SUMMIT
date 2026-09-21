@@ -148,7 +148,15 @@ body {
   .takeaway { padding: 28px 24px; }
   .takeaway-text { font-size: 18px; }
 }
+html { scroll-behavior: smooth; }
+.back-to-top { position: fixed; right: 24px; bottom: 24px; width: 44px; height: 44px; border-radius: 50%; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 18px; box-shadow: var(--shadow-sm); opacity: 0; visibility: hidden; transform: translateY(8px); transition: opacity .25s ease, transform .25s ease, visibility .25s ease; z-index: 50; }
+.back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+.back-to-top:hover { filter: brightness(1.1); }
+@media (max-width: 640px) {
+  .back-to-top { right: 16px; bottom: 16px; width: 40px; height: 40px; font-size: 16px; }
+}
 </style>
+
 </head>
 <body>
 <div class="progress-bar" id="progressBar"></div>
@@ -160,7 +168,7 @@ body {
     <div class="hero-meta"><div class="meta-item"><strong>우수연</strong>IBM 전문위원</div><div class="meta-item"><strong>2026.09.18</strong>Keynote 1 (20분)</div><div class="meta-item"><strong>SESSION 05</strong>CAIO Summit 2026</div></div>
   </div>
 </header>
-<nav class="toc-wrap">
+<nav class="toc-wrap" id="toc">
   <div class="toc">
     <div class="toc-title">Contents</div>
     <ol><li><a href="#ov">왜 소프트웨어 엔지니어링이었나</a></li><li><a href="#shift">보조에서 오케스트레이션까지, 4년의 이동</a></li><li><a href="#reality">하지만 현실은</a></li><li><a href="#gap">속도는 더 이상 어려운 부분이 아니다</a></li><li><a href="#bob">Project Bob</a></li><li><a href="#backlog">코드가 빨라지면 리뷰가 쌓인다</a></li><li><a href="#team">개인 생산성에서 팀·조직 역량으로</a></li><li><a href="#modern">대규모 현대화는 애플리케이션 단위가 아니다</a></li><li><a href="#shiftleft">보안을 개발 전 단계로 당긴다</a></li><li><a href="#deploy">환경마다 다른 배포 전략</a></li><li><a href="#cost">토큰 비용은 사용료가 아니라 엔지니어링 지표다</a></li><li><a href="#harness">성과는 보이지 않는 요소에서 결정된다</a></li><li><a href="#closing">엔터프라이즈 혁신이 완성되려면</a></li></ol>
@@ -176,11 +184,17 @@ body {
     <div class="footer-meta">작성: 이유진 · 2026</div>
   </div>
 </footer>
+<a href="#toc" class="back-to-top" id="backToTop" aria-label="목차로 이동">↑</a>
 <script>
 window.addEventListener('scroll', function() {
   var h = document.documentElement;
   var scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
   document.getElementById('progressBar').style.width = scrolled + '%';
+});
+var backToTop = document.getElementById('backToTop');
+window.addEventListener('scroll', function() {
+  if (window.scrollY > 480) { backToTop.classList.add('visible'); }
+  else { backToTop.classList.remove('visible'); }
 });
 </script>
 </body>

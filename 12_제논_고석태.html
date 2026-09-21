@@ -148,7 +148,15 @@ body {
   .takeaway { padding: 28px 24px; }
   .takeaway-text { font-size: 18px; }
 }
+html { scroll-behavior: smooth; }
+.back-to-top { position: fixed; right: 24px; bottom: 24px; width: 44px; height: 44px; border-radius: 50%; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 18px; box-shadow: var(--shadow-sm); opacity: 0; visibility: hidden; transform: translateY(8px); transition: opacity .25s ease, transform .25s ease, visibility .25s ease; z-index: 50; }
+.back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+.back-to-top:hover { filter: brightness(1.1); }
+@media (max-width: 640px) {
+  .back-to-top { right: 16px; bottom: 16px; width: 40px; height: 40px; font-size: 16px; }
+}
 </style>
+
 </head>
 <body>
 <div class="progress-bar" id="progressBar"></div>
@@ -160,7 +168,7 @@ body {
     <div class="hero-meta"><div class="meta-item"><strong>고석태</strong>제논 대표</div><div class="meta-item"><strong>2026.09.18</strong>Track 1 · Session 5 (30분)</div><div class="meta-item"><strong>SESSION 12</strong>CAIO Summit 2026</div></div>
   </div>
 </header>
-<nav class="toc-wrap">
+<nav class="toc-wrap" id="toc">
   <div class="toc">
     <div class="toc-title">Contents</div>
     <ol><li><a href="#ov">GenAI 1.0과 2.0을 가르는 선</a></li><li><a href="#inflection">5%에서 40%로</a></li><li><a href="#budget">예산의 성격이 바뀌었다</a></li><li><a href="#stages">도입의 네 단계</a></li><li><a href="#genos">에이전트를 SI로 하나씩 만들 수는 없다</a></li><li><a href="#citizen">현업이 직접 만든다</a></li><li><a href="#dataagent">데이터 분석 에이전트와 BC카드</a></li><li><a href="#research">애널리스트의 한 달을 다시 설계한다</a></li><li><a href="#shift">GenAI 1.0에서 2.0으로</a></li><li><a href="#fouraxes">네 방향의 확장</a></li><li><a href="#data">정형과 비정형을 잇는다</a></li><li><a href="#builder">채팅창을 벗어난다</a></li><li><a href="#actionable">행동하는 AI</a></li><li><a href="#demo">중부발전의 아침</a></li><li><a href="#physical">물리 세계로</a></li><li><a href="#closing">네 가지 확장으로 정리한다</a></li></ol>
@@ -176,11 +184,17 @@ body {
     <div class="footer-meta">작성: 이유진 · 2026</div>
   </div>
 </footer>
+<a href="#toc" class="back-to-top" id="backToTop" aria-label="목차로 이동">↑</a>
 <script>
 window.addEventListener('scroll', function() {
   var h = document.documentElement;
   var scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
   document.getElementById('progressBar').style.width = scrolled + '%';
+});
+var backToTop = document.getElementById('backToTop');
+window.addEventListener('scroll', function() {
+  if (window.scrollY > 480) { backToTop.classList.add('visible'); }
+  else { backToTop.classList.remove('visible'); }
 });
 </script>
 </body>

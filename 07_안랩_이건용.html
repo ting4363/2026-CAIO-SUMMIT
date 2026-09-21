@@ -148,7 +148,15 @@ body {
   .takeaway { padding: 28px 24px; }
   .takeaway-text { font-size: 18px; }
 }
+html { scroll-behavior: smooth; }
+.back-to-top { position: fixed; right: 24px; bottom: 24px; width: 44px; height: 44px; border-radius: 50%; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 18px; box-shadow: var(--shadow-sm); opacity: 0; visibility: hidden; transform: translateY(8px); transition: opacity .25s ease, transform .25s ease, visibility .25s ease; z-index: 50; }
+.back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+.back-to-top:hover { filter: brightness(1.1); }
+@media (max-width: 640px) {
+  .back-to-top { right: 16px; bottom: 16px; width: 40px; height: 40px; font-size: 16px; }
+}
 </style>
+
 </head>
 <body>
 <div class="progress-bar" id="progressBar"></div>
@@ -160,7 +168,7 @@ body {
     <div class="hero-meta"><div class="meta-item"><strong>이건용</strong>안랩 프로덕트매니지먼트2팀 팀장</div><div class="meta-item"><strong>2026.09.18</strong>Keynote 3 (18분)</div><div class="meta-item"><strong>SESSION 07</strong>CAIO Summit 2026</div></div>
   </div>
 </header>
-<nav class="toc-wrap">
+<nav class="toc-wrap" id="toc">
   <div class="toc">
     <div class="toc-title">Contents</div>
     <ol><li><a href="#ov">조금 다른 이야기를 하겠습니다</a></li><li><a href="#frontier">취약점을 찾아내는 프론티어 AI</a></li><li><a href="#notnew">공격의 원리가 바뀐 것은 아니다</a></li><li><a href="#vuln">취약점은 이미 기울기가 다르다</a></li><li><a href="#attacker">공격자의 워크플로우</a></li><li><a href="#defender">방어는 사람의 속도로 연결된다</a></li><li><a href="#concept">보고 · 이해하고 · 판단하고 · 대응한다</a></li><li><a href="#see">SEE — 무엇을 보고 있는가</a></li><li><a href="#decide">DECIDE — 195만 건에서 5건으로</a></li><li><a href="#act">ACT — 아직은 추천까지</a></li><li><a href="#arch">다섯 계층으로 연결한 아키텍처</a></li><li><a href="#closing">공격이 AI의 속도라면 방어도</a></li></ol>
@@ -176,11 +184,17 @@ body {
     <div class="footer-meta">작성: 이유진 · 2026</div>
   </div>
 </footer>
+<a href="#toc" class="back-to-top" id="backToTop" aria-label="목차로 이동">↑</a>
 <script>
 window.addEventListener('scroll', function() {
   var h = document.documentElement;
   var scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
   document.getElementById('progressBar').style.width = scrolled + '%';
+});
+var backToTop = document.getElementById('backToTop');
+window.addEventListener('scroll', function() {
+  if (window.scrollY > 480) { backToTop.classList.add('visible'); }
+  else { backToTop.classList.remove('visible'); }
 });
 </script>
 </body>

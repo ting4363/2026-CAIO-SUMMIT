@@ -148,7 +148,15 @@ body {
   .takeaway { padding: 28px 24px; }
   .takeaway-text { font-size: 18px; }
 }
+html { scroll-behavior: smooth; }
+.back-to-top { position: fixed; right: 24px; bottom: 24px; width: 44px; height: 44px; border-radius: 50%; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 18px; box-shadow: var(--shadow-sm); opacity: 0; visibility: hidden; transform: translateY(8px); transition: opacity .25s ease, transform .25s ease, visibility .25s ease; z-index: 50; }
+.back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+.back-to-top:hover { filter: brightness(1.1); }
+@media (max-width: 640px) {
+  .back-to-top { right: 16px; bottom: 16px; width: 40px; height: 40px; font-size: 16px; }
+}
 </style>
+
 </head>
 <body>
 <div class="progress-bar" id="progressBar"></div>
@@ -160,7 +168,7 @@ body {
     <div class="hero-meta"><div class="meta-item"><strong>임은영</strong>LG CNS AI클라우드사업부 AI센터 Agentic AI사업담당</div><div class="meta-item"><strong>2026.09.18</strong>Issue 1 (21분)</div><div class="meta-item"><strong>SESSION 02</strong>CAIO Summit 2026</div></div>
   </div>
 </header>
-<nav class="toc-wrap">
+<nav class="toc-wrap" id="toc">
   <div class="toc">
     <div class="toc-title">Contents</div>
     <ol><li><a href="#ov">현장에서 가장 고생하는 사람들</a></li><li><a href="#paradigm">예측의 시대에서 실행의 시대로</a></li><li><a href="#assistant">AI Assistant와 Agentic AI는 무엇이 다른가</a></li><li><a href="#gov">잘못 실행했을 때, 누가 책임지는가</a></li><li><a href="#why">모델이 아니라 오케스트레이션이 관건이다</a></li><li><a href="#stack">프롬프트에서 컨텍스트로, 다시 하네스로</a></li><li><a href="#reality">PoC는 100점, 운영은 50점에서 시작한다</a></li><li><a href="#twoq">AI 도입의 출발점은 두 가지 질문</a></li><li><a href="#enterprise">범용 엔터프라이즈 AI를 먼저 나눠 주라</a></li><li><a href="#compare">업무마다, 사람마다, 비용마다 맞는 모델이 다르다</a></li><li><a href="#mix">범용 · 내장형 · 특화 — 세 가지를 섞는다</a></li><li><a href="#halluc">할루시네이션은 현업이 직접 겪어야 한다</a></li><li><a href="#priority">전사 AX 과제를 고르는 기준</a></li><li><a href="#horizontal">버티컬이 아니라 호리즌탈 프로세스 이노베이션</a></li><li><a href="#roledesign">사람과 AI의 역할을 나누고, 플랫폼으로 받친다</a></li><li><a href="#closing">기술이 먼저가 아닙니다</a></li></ol>
@@ -176,11 +184,17 @@ body {
     <div class="footer-meta">작성: 이유진 · 2026</div>
   </div>
 </footer>
+<a href="#toc" class="back-to-top" id="backToTop" aria-label="목차로 이동">↑</a>
 <script>
 window.addEventListener('scroll', function() {
   var h = document.documentElement;
   var scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
   document.getElementById('progressBar').style.width = scrolled + '%';
+});
+var backToTop = document.getElementById('backToTop');
+window.addEventListener('scroll', function() {
+  if (window.scrollY > 480) { backToTop.classList.add('visible'); }
+  else { backToTop.classList.remove('visible'); }
 });
 </script>
 </body>

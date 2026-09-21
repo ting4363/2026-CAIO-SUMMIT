@@ -148,7 +148,15 @@ body {
   .takeaway { padding: 28px 24px; }
   .takeaway-text { font-size: 18px; }
 }
+html { scroll-behavior: smooth; }
+.back-to-top { position: fixed; right: 24px; bottom: 24px; width: 44px; height: 44px; border-radius: 50%; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 18px; box-shadow: var(--shadow-sm); opacity: 0; visibility: hidden; transform: translateY(8px); transition: opacity .25s ease, transform .25s ease, visibility .25s ease; z-index: 50; }
+.back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+.back-to-top:hover { filter: brightness(1.1); }
+@media (max-width: 640px) {
+  .back-to-top { right: 16px; bottom: 16px; width: 40px; height: 40px; font-size: 16px; }
+}
 </style>
+
 </head>
 <body>
 <div class="progress-bar" id="progressBar"></div>
@@ -160,7 +168,7 @@ body {
     <div class="hero-meta"><div class="meta-item"><strong>장정훈</strong>와이즈넛 상무 / CTO</div><div class="meta-item"><strong>2026.09.18</strong>Track 1 · Session 3 (25분)</div><div class="meta-item"><strong>SESSION 10</strong>CAIO Summit 2026</div></div>
   </div>
 </header>
-<nav class="toc-wrap">
+<nav class="toc-wrap" id="toc">
   <div class="toc">
     <div class="toc-title">Contents</div>
     <ol><li><a href="#ov">효율은 확인됐다, 남은 과제는 이익</a></li><li><a href="#korea">한국은행이 본 AI 확산의 현재</a></li><li><a href="#disconnect">절감한 시간은 저절로 생산성이 되지 않는다</a></li><li><a href="#adoption">쓰는 사람과 제품을 쓰는 사람</a></li><li><a href="#success5">성공적으로 구현한 곳은 5%</a></li><li><a href="#five">다섯 가지 문제</a></li><li><a href="#perception">빨라졌다고 느꼈지만 실제로는 느려졌다</a></li><li><a href="#qa">측정 기준부터 세운다</a></li><li><a href="#e2e">병목에 투입해야 전체가 빨라진다</a></li><li><a href="#rework">AI는 증폭기다</a></li><li><a href="#sdd">스펙 주도 개발</a></li><li><a href="#halluc">만든 시간보다 확인하는 시간</a></li><li><a href="#cost">인원이 늘면 비용도 늘어난다</a></li><li><a href="#personal">개인화 에이전트</a></li><li><a href="#shift">단위 · 지표 · 책임의 전환</a></li><li><a href="#platform">네 개 레이어와 구축 사례</a></li><li><a href="#closing">CxO가 물어야 할 다섯 가지</a></li></ol>
@@ -176,11 +184,17 @@ body {
     <div class="footer-meta">작성: 이유진 · 2026</div>
   </div>
 </footer>
+<a href="#toc" class="back-to-top" id="backToTop" aria-label="목차로 이동">↑</a>
 <script>
 window.addEventListener('scroll', function() {
   var h = document.documentElement;
   var scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
   document.getElementById('progressBar').style.width = scrolled + '%';
+});
+var backToTop = document.getElementById('backToTop');
+window.addEventListener('scroll', function() {
+  if (window.scrollY > 480) { backToTop.classList.add('visible'); }
+  else { backToTop.classList.remove('visible'); }
 });
 </script>
 </body>

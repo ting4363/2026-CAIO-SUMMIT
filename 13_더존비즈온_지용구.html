@@ -148,7 +148,15 @@ body {
   .takeaway { padding: 28px 24px; }
   .takeaway-text { font-size: 18px; }
 }
+html { scroll-behavior: smooth; }
+.back-to-top { position: fixed; right: 24px; bottom: 24px; width: 44px; height: 44px; border-radius: 50%; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 18px; box-shadow: var(--shadow-sm); opacity: 0; visibility: hidden; transform: translateY(8px); transition: opacity .25s ease, transform .25s ease, visibility .25s ease; z-index: 50; }
+.back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+.back-to-top:hover { filter: brightness(1.1); }
+@media (max-width: 640px) {
+  .back-to-top { right: 16px; bottom: 16px; width: 40px; height: 40px; font-size: 16px; }
+}
 </style>
+
 </head>
 <body>
 <div class="progress-bar" id="progressBar"></div>
@@ -160,7 +168,7 @@ body {
     <div class="hero-meta"><div class="meta-item"><strong>지용구</strong>더존비즈온 대표이사(사장)</div><div class="meta-item"><strong>2026.09.18</strong>Closing (33분)</div><div class="meta-item"><strong>SESSION 13</strong>CAIO Summit 2026</div></div>
   </div>
 </header>
-<nav class="toc-wrap">
+<nav class="toc-wrap" id="toc">
   <div class="toc">
     <div class="toc-title">Contents</div>
     <ol><li><a href="#ov">지금 AI 기술의 온도는 99도</a></li><li><a href="#shift">연결에서 지능화로, 이제는 자율적인 실행으로</a></li><li><a href="#threeq">88%를 어떻게 읽을 것인가</a></li><li><a href="#gap">개인의 경험을 조직에 가져오면</a></li><li><a href="#why88">문제는 AI가 아니라 업무 구조의 부재</a></li><li><a href="#proactive">지시를 기다리는 AI에서 먼저 제안하는 AI로</a></li><li><a href="#smart">개인은 똑똑한데 조직은 왜 멍청한가</a></li><li><a href="#dxax">결정론적인 것과 확률론적인 것</a></li><li><a href="#tesla">60대 택시기사와 AI의 대화</a></li><li><a href="#code">코드는 본질이 아니다</a></li><li><a href="#record">조직의 합의를 기록으로 남긴다</a></li><li><a href="#tools">대체되는 것은 도구, 남는 것은 기록</a></li><li><a href="#trust">구조화된 현실 위에 세워진 지능</a></li><li><a href="#ceo">CEO는 이제 CXO가 되어야 한다</a></li><li><a href="#evolution">일하는 방식의 진화</a></li><li><a href="#closing">불가피한 것을 금기하려 하면</a></li></ol>
@@ -176,11 +184,17 @@ body {
     <div class="footer-meta">작성: 이유진 · 2026</div>
   </div>
 </footer>
+<a href="#toc" class="back-to-top" id="backToTop" aria-label="목차로 이동">↑</a>
 <script>
 window.addEventListener('scroll', function() {
   var h = document.documentElement;
   var scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
   document.getElementById('progressBar').style.width = scrolled + '%';
+});
+var backToTop = document.getElementById('backToTop');
+window.addEventListener('scroll', function() {
+  if (window.scrollY > 480) { backToTop.classList.add('visible'); }
+  else { backToTop.classList.remove('visible'); }
 });
 </script>
 </body>

@@ -148,7 +148,15 @@ body {
   .takeaway { padding: 28px 24px; }
   .takeaway-text { font-size: 18px; }
 }
+html { scroll-behavior: smooth; }
+.back-to-top { position: fixed; right: 24px; bottom: 24px; width: 44px; height: 44px; border-radius: 50%; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 18px; box-shadow: var(--shadow-sm); opacity: 0; visibility: hidden; transform: translateY(8px); transition: opacity .25s ease, transform .25s ease, visibility .25s ease; z-index: 50; }
+.back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+.back-to-top:hover { filter: brightness(1.1); }
+@media (max-width: 640px) {
+  .back-to-top { right: 16px; bottom: 16px; width: 40px; height: 40px; font-size: 16px; }
+}
 </style>
+
 </head>
 <body>
 <div class="progress-bar" id="progressBar"></div>
@@ -160,7 +168,7 @@ body {
     <div class="hero-meta"><div class="meta-item"><strong>김재은</strong>솔트룩스 CTO</div><div class="meta-item"><strong>2026.09.18</strong>Track 1 · Session 1 (32분)</div><div class="meta-item"><strong>SESSION 08</strong>CAIO Summit 2026</div></div>
   </div>
 </header>
-<nav class="toc-wrap">
+<nav class="toc-wrap" id="toc">
   <div class="toc">
     <div class="toc-title">Contents</div>
     <ol><li><a href="#ov">모델과 에이전트, 그리고 온톨로지</a></li><li><a href="#explosion">지식 폭발과 인지 과부하의 시대</a></li><li><a href="#scaling">길게 생각하는 AI</a></li><li><a href="#structure">LLM에 들어오는 화살표를 세어 보라</a></li><li><a href="#level">지금 AI 에이전트는 어느 수준인가</a></li><li><a href="#personal">1인 1에이전트와 엔터프라이즈 AX는 다르다</a></li><li><a href="#aaii">AAII 리터러시</a></li><li><a href="#bench">점수가 떨어진 이유</a></li><li><a href="#token">똑똑한 모델이 토큰을 적게 쓴다</a></li><li><a href="#effort">같은 지능, 다른 토큰</a></li><li><a href="#efficiency">이제는 추론 효율까지 봐야 한다</a></li><li><a href="#cost">비용 경쟁의 중심은 학습에서 추론으로</a></li><li><a href="#maxxing">벤치마크를 맹신하면 안 되는 이유</a></li><li><a href="#metr">AI는 몇 시간짜리 일을 대신할 수 있는가</a></li><li><a href="#agent">에이전트란 무엇을 하는 존재인가</a></li><li><a href="#onto">왜 지금 다시 온톨로지인가</a></li><li><a href="#neuro">사람 중심의 의사결정을 위한 구조</a></li><li><a href="#align">플랫폼 · 모델 · 에이전트 · 온톨로지 정렬</a></li></ol>
@@ -176,11 +184,17 @@ body {
     <div class="footer-meta">작성: 이유진 · 2026</div>
   </div>
 </footer>
+<a href="#toc" class="back-to-top" id="backToTop" aria-label="목차로 이동">↑</a>
 <script>
 window.addEventListener('scroll', function() {
   var h = document.documentElement;
   var scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
   document.getElementById('progressBar').style.width = scrolled + '%';
+});
+var backToTop = document.getElementById('backToTop');
+window.addEventListener('scroll', function() {
+  if (window.scrollY > 480) { backToTop.classList.add('visible'); }
+  else { backToTop.classList.remove('visible'); }
 });
 </script>
 </body>

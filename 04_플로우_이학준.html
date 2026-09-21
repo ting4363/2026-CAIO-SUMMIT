@@ -148,7 +148,15 @@ body {
   .takeaway { padding: 28px 24px; }
   .takeaway-text { font-size: 18px; }
 }
+html { scroll-behavior: smooth; }
+.back-to-top { position: fixed; right: 24px; bottom: 24px; width: 44px; height: 44px; border-radius: 50%; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 18px; box-shadow: var(--shadow-sm); opacity: 0; visibility: hidden; transform: translateY(8px); transition: opacity .25s ease, transform .25s ease, visibility .25s ease; z-index: 50; }
+.back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+.back-to-top:hover { filter: brightness(1.1); }
+@media (max-width: 640px) {
+  .back-to-top { right: 16px; bottom: 16px; width: 40px; height: 40px; font-size: 16px; }
+}
 </style>
+
 </head>
 <body>
 <div class="progress-bar" id="progressBar"></div>
@@ -160,7 +168,7 @@ body {
     <div class="hero-meta"><div class="meta-item"><strong>이학준</strong>플로우 / 마드라스체크 대표이사</div><div class="meta-item"><strong>2026.09.18</strong>Issue 3 (20분)</div><div class="meta-item"><strong>SESSION 04</strong>CAIO Summit 2026</div></div>
   </div>
 </header>
-<nav class="toc-wrap">
+<nav class="toc-wrap" id="toc">
   <div class="toc">
     <div class="toc-title">Contents</div>
     <ol><li><a href="#ov">소프트웨어는 정말 잡아먹혔는가</a></li><li><a href="#gap">SaaS 산업은 커졌는데, 일은 빨라졌는가</a></li><li><a href="#singularity">작년 말, 특이점에 도달했다</a></li><li><a href="#data">손을 든 사람이 한 명도 없었다</a></li><li><a href="#process">툴은 많은데 워크플로우로 이어지지 않는다</a></li><li><a href="#goal">목표와 어긋나면 0이다</a></li><li><a href="#assets">우리가 이미 가지고 있던 것</a></li><li><a href="#repattern">데이터와 가치의 연결</a></li><li><a href="#wiki">대충 쓰인 글을 살아 있는 문서로</a></li><li><a href="#connect">프로세스와 프로세스의 연결</a></li><li><a href="#agentwork">사람과 에이전트가 함께 일하는 공간</a></li><li><a href="#okr">목표와 실행의 연결</a></li><li><a href="#coding">Agentic Coding은 위기가 아니라 기회였다</a></li><li><a href="#devportal">개발자 센터는 이제 AI가 읽는 페이지다</a></li><li><a href="#closing">살아남는 것은 솔루션 빌더</a></li></ol>
@@ -176,11 +184,17 @@ body {
     <div class="footer-meta">작성: 이유진 · 2026</div>
   </div>
 </footer>
+<a href="#toc" class="back-to-top" id="backToTop" aria-label="목차로 이동">↑</a>
 <script>
 window.addEventListener('scroll', function() {
   var h = document.documentElement;
   var scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
   document.getElementById('progressBar').style.width = scrolled + '%';
+});
+var backToTop = document.getElementById('backToTop');
+window.addEventListener('scroll', function() {
+  if (window.scrollY > 480) { backToTop.classList.add('visible'); }
+  else { backToTop.classList.remove('visible'); }
 });
 </script>
 </body>

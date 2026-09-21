@@ -148,7 +148,15 @@ body {
   .takeaway { padding: 28px 24px; }
   .takeaway-text { font-size: 18px; }
 }
+html { scroll-behavior: smooth; }
+.back-to-top { position: fixed; right: 24px; bottom: 24px; width: 44px; height: 44px; border-radius: 50%; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 18px; box-shadow: var(--shadow-sm); opacity: 0; visibility: hidden; transform: translateY(8px); transition: opacity .25s ease, transform .25s ease, visibility .25s ease; z-index: 50; }
+.back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+.back-to-top:hover { filter: brightness(1.1); }
+@media (max-width: 640px) {
+  .back-to-top { right: 16px; bottom: 16px; width: 40px; height: 40px; font-size: 16px; }
+}
 </style>
+
 </head>
 <body>
 <div class="progress-bar" id="progressBar"></div>
@@ -160,7 +168,7 @@ body {
     <div class="hero-meta"><div class="meta-item"><strong>전규화</strong>비아이매트릭스 상무</div><div class="meta-item"><strong>2026.09.18</strong>Issue 2 (21분)</div><div class="meta-item"><strong>SESSION 03</strong>CAIO Summit 2026</div></div>
   </div>
 </header>
-<nav class="toc-wrap">
+<nav class="toc-wrap" id="toc">
   <div class="toc">
     <div class="toc-title">Contents</div>
     <ol><li><a href="#ov">탈모 증세를 보이는 분들께</a></li><li><a href="#wrongtarget">업무 자동화인가, AI 경진대회인가</a></li><li><a href="#data">가장 많은 돈을 들인 지식 자산은 데이터베이스다</a></li><li><a href="#excel">엑셀 내려받아 피벗 돌리고 PPT에 붙이는 일</a></li><li><a href="#wall">방화벽 안에서는 똑똑한 모델을 쓸 수 없다</a></li><li><a href="#poop">AI에게 데이터를 학습시키면 안 되는 이유</a></li><li><a href="#sql">학습시키지 말고, SQL을 짜서 가져오게 하라</a></li><li><a href="#roi">인사규정 챗봇은 출산휴가 갈 때나 쓰인다</a></li><li><a href="#demo">라이브 데모 — 게이밍 그래픽카드 위에서</a></li><li><a href="#question">현업은 질문하는 것부터 어려워한다</a></li><li><a href="#complex">한 번의 쿼리로 풀 수 없는 질문</a></li><li><a href="#ontology">쌓인 분석이 온톨로지가 된다</a></li><li><a href="#layers">어떻게 가르쳐야 사람처럼 일할까</a></li><li><a href="#bi">BI 26년, 질문은 달라지지 않았다</a></li><li><a href="#cost">100명에게 열흘 열었더니 토큰 3천만 원</a></li><li><a href="#closing">성공한 AX는 어떻게 증명되는가</a></li></ol>
@@ -176,11 +184,17 @@ body {
     <div class="footer-meta">작성: 이유진 · 2026</div>
   </div>
 </footer>
+<a href="#toc" class="back-to-top" id="backToTop" aria-label="목차로 이동">↑</a>
 <script>
 window.addEventListener('scroll', function() {
   var h = document.documentElement;
   var scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
   document.getElementById('progressBar').style.width = scrolled + '%';
+});
+var backToTop = document.getElementById('backToTop');
+window.addEventListener('scroll', function() {
+  if (window.scrollY > 480) { backToTop.classList.add('visible'); }
+  else { backToTop.classList.remove('visible'); }
 });
 </script>
 </body>

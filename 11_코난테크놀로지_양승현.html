@@ -148,7 +148,15 @@ body {
   .takeaway { padding: 28px 24px; }
   .takeaway-text { font-size: 18px; }
 }
+html { scroll-behavior: smooth; }
+.back-to-top { position: fixed; right: 24px; bottom: 24px; width: 44px; height: 44px; border-radius: 50%; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 18px; box-shadow: var(--shadow-sm); opacity: 0; visibility: hidden; transform: translateY(8px); transition: opacity .25s ease, transform .25s ease, visibility .25s ease; z-index: 50; }
+.back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+.back-to-top:hover { filter: brightness(1.1); }
+@media (max-width: 640px) {
+  .back-to-top { right: 16px; bottom: 16px; width: 40px; height: 40px; font-size: 16px; }
+}
 </style>
+
 </head>
 <body>
 <div class="progress-bar" id="progressBar"></div>
@@ -160,7 +168,7 @@ body {
     <div class="hero-meta"><div class="meta-item"><strong>양승현</strong>코난테크놀로지 COO / 부사장</div><div class="meta-item"><strong>2026.09.18</strong>Track 1 · Session 4 (28분)</div><div class="meta-item"><strong>SESSION 11</strong>CAIO Summit 2026</div></div>
   </div>
 </header>
-<nav class="toc-wrap">
+<nav class="toc-wrap" id="toc">
   <div class="toc">
     <div class="toc-title">Contents</div>
     <ol><li><a href="#ov">네 개의 장</a></li><li><a href="#flatten">모델은 상향 평준화됐다</a></li><li><a href="#jagged">금메달은 따는데 시계는 못 읽는다</a></li><li><a href="#task">작업 지능은 아직 낮다</a></li><li><a href="#unit">검증 가능한 단위로 자른다</a></li><li><a href="#longhorizon">20단계를 거치면 81%가 된다</a></li><li><a href="#why">왜 지금 Agentic Enterprise인가</a></li><li><a href="#maturity">다섯 단계 중 어디에 있는가</a></li><li><a href="#roi">재무 성과까지 간 기업은 7%</a></li><li><a href="#transform">절감한 시간을 성과로 바꾸는 장치</a></li><li><a href="#workflow">AI가 업무의 주체가 되는 흐름</a></li><li><a href="#cases">개발과 현장, 두 가지 사례</a></li><li><a href="#arch">LLM이 빠져 있는 아키텍처</a></li><li><a href="#premise">그냥 얹는다고 돌아가지 않는다</a></li><li><a href="#productivity">개인이 빨라지는 게 아니라</a></li><li><a href="#org">사람 + 에이전트 셀</a></li><li><a href="#risk">통제할 수 있어야 붕괴하지 않는다</a></li><li><a href="#closing">AI를 쓰는 기업에서 AI가 일하는 기업으로</a></li></ol>
@@ -176,11 +184,17 @@ body {
     <div class="footer-meta">작성: 이유진 · 2026</div>
   </div>
 </footer>
+<a href="#toc" class="back-to-top" id="backToTop" aria-label="목차로 이동">↑</a>
 <script>
 window.addEventListener('scroll', function() {
   var h = document.documentElement;
   var scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
   document.getElementById('progressBar').style.width = scrolled + '%';
+});
+var backToTop = document.getElementById('backToTop');
+window.addEventListener('scroll', function() {
+  if (window.scrollY > 480) { backToTop.classList.add('visible'); }
+  else { backToTop.classList.remove('visible'); }
 });
 </script>
 </body>

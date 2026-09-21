@@ -148,7 +148,15 @@ body {
   .takeaway { padding: 28px 24px; }
   .takeaway-text { font-size: 18px; }
 }
+html { scroll-behavior: smooth; }
+.back-to-top { position: fixed; right: 24px; bottom: 24px; width: 44px; height: 44px; border-radius: 50%; background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 18px; box-shadow: var(--shadow-sm); opacity: 0; visibility: hidden; transform: translateY(8px); transition: opacity .25s ease, transform .25s ease, visibility .25s ease; z-index: 50; }
+.back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+.back-to-top:hover { filter: brightness(1.1); }
+@media (max-width: 640px) {
+  .back-to-top { right: 16px; bottom: 16px; width: 40px; height: 40px; font-size: 16px; }
+}
 </style>
+
 </head>
 <body>
 <div class="progress-bar" id="progressBar"></div>
@@ -160,7 +168,7 @@ body {
     <div class="hero-meta"><div class="meta-item"><strong>김성식</strong>엔코아 그룹장</div><div class="meta-item"><strong>2026.09.18</strong>Track 1 · Session 2 (28분)</div><div class="meta-item"><strong>SESSION 09</strong>CAIO Summit 2026</div></div>
   </div>
 </header>
-<nav class="toc-wrap">
+<nav class="toc-wrap" id="toc">
   <div class="toc">
     <div class="toc-title">Contents</div>
     <ol><li><a href="#ov">운영 환경은 야생과 같다</a></li><li><a href="#clocks">서로 다른 세 개의 시계</a></li><li><a href="#walls">시작의 벽과 확산의 벽</a></li><li><a href="#gap">투자는 두 배가 됐는데</a></li><li><a href="#axis">세 축 가운데 아직 공략되지 않은 하나</a></li><li><a href="#swap">교체 대상은 Agent, 축적 대상은 판단 기반</a></li><li><a href="#trauma">천재 한 사람이 아니라 팀이 판단한다</a></li><li><a href="#common">과제마다 반복하지 않으려면</a></li><li><a href="#layer">Context Layer의 세 요소</a></li><li><a href="#reuse">공통 의미는 승인을 거쳐 Backbone으로</a></li><li><a href="#verify">줄일 것은 재구축, 생략하지 말 것은 검증</a></li><li><a href="#domain">산업은 달라도 운영 원칙은 같다</a></li><li><a href="#platform">AI-Ready Data Platform</a></li><li><a href="#thin">Agent는 얇게, Context Layer는 두껍게</a></li><li><a href="#first90">첫 과제를 고르고 90일을 설계한다</a></li><li><a href="#flywheel">한 번의 정비가 아니라 운영 루프</a></li></ol>
@@ -176,11 +184,17 @@ body {
     <div class="footer-meta">작성: 이유진 · 2026</div>
   </div>
 </footer>
+<a href="#toc" class="back-to-top" id="backToTop" aria-label="목차로 이동">↑</a>
 <script>
 window.addEventListener('scroll', function() {
   var h = document.documentElement;
   var scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
   document.getElementById('progressBar').style.width = scrolled + '%';
+});
+var backToTop = document.getElementById('backToTop');
+window.addEventListener('scroll', function() {
+  if (window.scrollY > 480) { backToTop.classList.add('visible'); }
+  else { backToTop.classList.remove('visible'); }
 });
 </script>
 </body>
